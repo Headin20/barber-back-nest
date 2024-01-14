@@ -1,4 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
+import * as Joi from 'joi';
+
 import {
   MAX_DESCRIPTION_LENGTH,
   MAX_PASSWORD_LENGTH,
@@ -6,7 +8,6 @@ import {
   MIN_PASSWORD_LENGTH,
 } from '../../const/rules';
 import roles, { UserRole } from '../../const/roles';
-import * as Joi from 'joi';
 import { GenderTypeEnum, genderTypes } from '../../const/genderTypes';
 
 export const createUserSchema = Joi.object({

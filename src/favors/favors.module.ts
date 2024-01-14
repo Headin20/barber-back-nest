@@ -10,6 +10,7 @@ import { FavorsService } from './favors.service';
     JwtModule,
     MongooseModule.forFeature([{ name: Favor.name, schema: FavorsSchema }]),
   ],
+  exports: [FavorsService],
   providers: [FavorsService],
   controllers: [FavorsController],
 })

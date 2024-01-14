@@ -6,6 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { FavorsModule } from './favors/favors.module';
 import { AwsS3Module } from './aws-s3/aws-s3.module';
+import { AppointmentsModule } from './appointments/appointments.module';
 
 import * as dotenv from 'dotenv';
 
@@ -23,6 +24,7 @@ dotenv.config();
     }),
     FavorsModule,
     AwsS3Module,
+    AppointmentsModule,
   ],
   providers: [SessionsService],
 })

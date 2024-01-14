@@ -7,6 +7,8 @@ import {
   UseGuards,
   HttpCode,
   HttpStatus,
+  Put,
+  Param,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ApiBearerAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
@@ -23,6 +25,7 @@ import {
 } from '../common/paginations/pagination.decorator';
 import { PaginationOptionsDto } from '../common/paginations/pagination.dto';
 import { PaginationResult } from '../common/paginations/pagination.result';
+import { updateUserSchema, UserUpdateDto } from './dto/user.update';
 
 @ApiTags(controllers.users)
 @Controller(controllers.users)
@@ -33,9 +36,17 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
+  @Roles(roles.admin)
   @UsePipes(new JoiValidationPipe(createUserSchema))
   async create(@Body() createUserDto: UserCreateDto) {
     return this.usersService.create(createUserDto);
+  }
+
+  @Put(':id')
+  @Roles(roles.admin)
+  @UsePipes(new JoiValidationPipe(updateUserSchema))
+  async update(@Param('id') id: string, @Body() userUpdateDto: UserUpdateDto) {
+    return this.usersService.update(id, userUpdateDto);
   }
 
   @OpenApiPaginationResponse(User)

@@ -3,4 +3,5 @@ export default {
   users: 'users',
   sessions: 'sessions',
   favors: 'favors',
+  appointments: 'appointments',
 };
