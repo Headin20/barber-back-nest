@@ -27,13 +27,10 @@ export const createAppointmentSchema = Joi.object({
 });
 
 export class CreateAppointmentDto {
-  @ApiProperty({ example: '65898beca1ea76d997a47b0b' })
+  @ApiProperty({ example: '65a3f9dde144b85b6786090d' })
   readonly performerId: string;
 
-  @ApiProperty({ example: '65898beca1ea76d997a47b0b' })
-  readonly userId: string;
-
-  @ApiProperty({ example: '65898beca1ea76d997a47b0b' })
+  @ApiProperty({ example: '6590733a3fe52c1ec22c7f46' })
   readonly favorId: string;
 
   @ApiProperty({

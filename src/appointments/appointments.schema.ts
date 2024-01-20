@@ -30,6 +30,10 @@ export class Appointment {
   @ApiProperty({ example: new Date() })
   @Prop()
   time: Date;
+
+  @ApiProperty({ example: new Date() })
+  @Prop()
+  endTime: Date;
 }
 
 export type AppointmentDocument = HydratedDocument<Appointment>;

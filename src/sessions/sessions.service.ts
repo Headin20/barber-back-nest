@@ -5,7 +5,7 @@ import * as crypt from 'bcryptjs';
 import { LoginDto } from './dto/login-dto';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user.schema';
-import {UserCreateDto} from "../users/dto/user.create";
+import { UserCreateDto } from '../users/dto/user.create';
 
 @Injectable()
 export class SessionsService {

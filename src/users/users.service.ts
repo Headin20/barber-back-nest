@@ -1,4 +1,9 @@
-import {HttpException, HttpStatus, Injectable, NotFoundException} from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Model } from 'mongoose';
 import * as crypt from 'bcryptjs';
 
@@ -49,7 +54,7 @@ export class UsersService {
   }
 
   async getUserById(id: string): Promise<User> {
-    const user = this.userModel.findById(id).select('-password');
+    const user = await this.userModel.findById(id).select('-password');
     if (!user) {
       throw new NotFoundException(NOT_FOUND_ERROR(id));
     }
@@ -58,10 +63,7 @@ export class UsersService {
 
   async getUserByLogin(login: string): Promise<User> {
     try {
-      return await this.userModel
-        .findOne({ login: login })
-        .select('-password')
-        .exec();
+      return this.userModel.findOne({ login: login }).exec();
     } catch (err) {
       throw new HttpException(err.message, HttpStatus.BAD_REQUEST);
     }

@@ -10,6 +10,7 @@ async function bootstrap() {
     defaultVersion: '1',
     type: VersioningType.URI,
   });
+  app.enableCors();
 
   const config = new DocumentBuilder()
     .addBearerAuth()
