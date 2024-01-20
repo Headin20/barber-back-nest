@@ -9,6 +9,8 @@ import { AwsS3Module } from './aws-s3/aws-s3.module';
 import { AppointmentsModule } from './appointments/appointments.module';
 
 import * as dotenv from 'dotenv';
+import { APP_FILTER } from '@nestjs/core';
+import { HttpMongoExceptionFilter } from './common/http-mongo-exception.filter';
 
 dotenv.config();
 
@@ -26,6 +28,12 @@ dotenv.config();
     AwsS3Module,
     AppointmentsModule,
   ],
-  providers: [SessionsService],
+  providers: [
+    SessionsService,
+    {
+      provide: APP_FILTER,
+      useClass: HttpMongoExceptionFilter,
+    },
+  ],
 })
 export class AppModule {}

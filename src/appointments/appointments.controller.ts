@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -68,6 +69,19 @@ export class AppointmentsController {
   ): Promise<Appointment> {
     const { _id } = decodedToken;
     return this.appointmentService.update(id, updateAppointmentDto, _id);
+  }
+
+  @ApiResponse({ status: HttpStatus.NO_CONTENT })
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @Delete(':id')
+  @Roles(roles.user)
+  @UsePipes(new JoiValidationPipe(updateAppointmentSchema))
+  async remove(
+    @Param('id') id: string,
+    @DecodedToken() decodedToken: TokenTypes,
+  ): Promise<void> {
+    const { _id } = decodedToken;
+    return this.appointmentService.remove(id, _id);
   }
 
   @OpenApiPaginationResponse(Appointment)

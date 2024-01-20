@@ -3,6 +3,7 @@ import { VersioningType } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
+import { HttpMongoExceptionFilter } from './common/http-mongo-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,6 +20,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/swagger', app, document);
+  app.useGlobalFilters(new HttpMongoExceptionFilter());
 
   await app.listen(process.env.PORT);
 }

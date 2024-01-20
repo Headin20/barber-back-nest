@@ -277,4 +277,15 @@ export class AppointmentsService {
       totalItems,
     });
   }
+
+  async remove(id: string, userId: Types.ObjectId): Promise<void> {
+    const appointment = await this.getOne(id);
+
+    if (!appointment.userId.equals(userId)) {
+      throw new HttpException('Not your appointment', HttpStatus.BAD_REQUEST);
+    }
+
+    this.appointmentModel.findByIdAndDelete(id);
+    return;
+  }
 }
