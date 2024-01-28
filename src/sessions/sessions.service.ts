@@ -14,13 +14,24 @@ export class SessionsService {
     private usersService: UsersService,
   ) {}
 
-  private async generateToken(user: User): Promise<{ token: string }> {
-    const { login, role, _id } = user;
+  private async generateToken(
+    user: User,
+  ): Promise<{ token: string; user: User }> {
+    const { login, role, _id, bio, birthdate, photo, gender } = user;
     const payload = { _id, login, role };
     return {
       token: this.jwtService.sign(payload, {
         secret: process.env.PRIVATE_KEY,
       }),
+      user: {
+        _id,
+        login,
+        role,
+        bio,
+        birthdate,
+        photo,
+        gender,
+      },
     };
   }
 
